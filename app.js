@@ -1,6 +1,7 @@
 const exp = require("express");
 const cors = require("cors");
 const morgan =require("morgan");
+const router = require("./router");
 
 // L'application utilise le framework express donc on importe la suite
 const app = express();
@@ -24,6 +25,9 @@ app.use(express.json());
 
 //Exemple de reponse simple a une requete GET
 app.get("/", (req, res) => res.json("Hellow world!"));
+
+const router = require("./router");
+app.use("/api, router");
 
 // Exemple erreur 404
 app.use((req, res) => res.status(404).json({ error: "Page not found!"}));
