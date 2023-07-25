@@ -4,7 +4,7 @@ const app = require("./app");
 // Configurer un port valide pour le serveur
 
 const normalizePort = val => {
-    const port = parsesInt(val, 10);
+    const port = parseInt(val, 10);
 
     if (isNaN(port)) {
         return val;
@@ -25,7 +25,7 @@ const errorHandler = error => {
         throw error;
     }
 
-    const adress = server.adress(); 
+    const address = server.address(); 
     const bind = typeof address === "string" ? "pipe" + address : "port" + port;
 
     switch (error.code) {
@@ -50,7 +50,7 @@ const errorHandler = error => {
 const server = http.createServer(app);
 server.on ("error", errorHandler);
 server.on("listening", () => {
-    const adress = server.adress();
+    const address = server.address();
     const bind = typeof address === "string" ? "pipe" + address : "port" + port;
     console.log("Listening on " + bind);
 });
