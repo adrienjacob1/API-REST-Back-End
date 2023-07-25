@@ -1,30 +1,33 @@
 let data = require("./data");
 
-exports.addPerson(newData) {
+exports.addPerson = (req, res) => {
     const newPerson = {
-        ...newData
+        ...req.body,
+        id: data.length + 1
     };
 
     data.push(newPerson);
+    console.log(data);
 
-    res.status(201).json({ data : newPerson, message: "Compte créé" });
+    res.status(201).json({ message: "Compte créé" });
 };
 
-exports.getAllPersons = () => {
+exports.getAllPersons = (req, res) => {
     res.status(200).json(data);
 };
 
-exports.getOnePerson = (id) => {
-    const foundPerson = data.find(item => item.id === +id);
+exports.getOnePerson = (req, res) => {
+    const foundPerson = data.find(item => item.id === +req.params.id);
+    console.log(foundPerson)
     res.status(200).json({ person: foundPerson });
 }
 
-exports.updateOnePerson = (newData) => {
-    data = data.map(item => item.id === newData.id ? newData : item);
+exports.updateOnePerson = (req, res) => {
+    data = data.map(item => item.id === req.body.id ? req.body : item);
     res.status(200).json({ message : "Compte mis à jour"});
 }
 
-exports.removePerson = (id) => {
-    data = data.filter(item => item.id !== +id);
+exports.removePerson = (req, res) => {
+    data = data.filter(item => item.id !== +req.params.id);
     res.status(200).json({ message : "Compte supprimé"})
 }

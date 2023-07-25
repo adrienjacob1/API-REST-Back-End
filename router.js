@@ -3,14 +3,14 @@ const router = express.Router();
 
 const controller = require("./controller");
 
-router.post("/persons", controller.addPerson(req.body));
+router.post("/persons", controller.addPerson);
 
 router.get("/persons", controller.getAllPersons);
 
-router.get("/persons:id", controller.getOnePerson(req.params.id));
+router.get("/persons:id", controller.getOnePerson);
 
-router.put("/persons", controller.updateOnePerson(req.body));
+router.put("/persons", controller.updateOnePerson);
 
-router.delete("/persons/:id", controller.removePerson(req.params.id));
+router.delete("/persons/:id", controller.removePerson);
 
 module.exports = router;
